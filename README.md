@@ -71,7 +71,7 @@ Jackett has no official repository, but can update automatically with built in u
 First of all, you need to download the latest release:
 
 ```shell
-jackettver=$(wget -q https://github.com/Jackett/Jackett/releases/latest -O - | grep -E \/tag\/ | awk -F "[><]" '{print $3}') &&
+jackettver=$(wget -q https://github.com/Jackett/Jackett/releases/latest -O - | grep -E \/tag\/v[0-9\.]+\"\> | awk -F "[><]" '{print $3}') &&
 wget -q https://github.com/Jackett/Jackett/releases/download/$jackettver/Jackett.Binaries.Mono.tar.gz
 ```
 
@@ -80,7 +80,8 @@ Then extract and move files to destination folder, change owner on destination f
 ```shell
 tar -xvf Jackett* &&
 sudo mkdir /opt/jackett &&
-sudo mv Jackett/* /opt/jackett &&
+#sudo mv Jackett/* /opt/jackett &&
+sudo rsync -a Jackett/ /opt/jackett/ &&
 rm -rf Jackett* &&
 sudo chown -R YOUR_USERNAME:YOUR_USERNAME /opt/jackett
 ```
