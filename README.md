@@ -77,10 +77,19 @@ wget -q https://github.com/Jackett/Jackett/releases/download/$jackettver/Jackett
 
 Then extract and move files to destination folder, change owner on destination folder to the actual user:
 
+New Installation:
 ```shell
 tar -xvf Jackett* &&
 sudo mkdir /opt/jackett &&
 #sudo mv Jackett/* /opt/jackett &&
+sudo rsync -a Jackett/ /opt/jackett/ &&
+rm -rf Jackett* &&
+sudo chown -R YOUR_USERNAME:YOUR_USERNAME /opt/jackett
+```
+
+Update existing:
+```shell
+tar -xvf Jackett* &&
 sudo rsync -a Jackett/ /opt/jackett/ &&
 rm -rf Jackett* &&
 sudo chown -R YOUR_USERNAME:YOUR_USERNAME /opt/jackett
